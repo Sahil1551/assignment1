@@ -60,7 +60,10 @@ function CoinFlipGame() {
           setBetError('Insufficient balance.');
           return;
       }
-
+      if (betAmountNumber > balance) {
+        setBetError('Insufficient balance.');
+        return;
+    }
         setBetError('');
 
         const flipResult = Math.random() < 0.5 ? 'heads' : 'tails';
