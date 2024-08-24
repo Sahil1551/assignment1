@@ -30,7 +30,7 @@ function CoinFlipGame() {
                 try {
                     const connection = new Connection(clusterApiUrl(WalletAdapterNetwork.Devnet));
                     const balance = await connection.getBalance(publicKey);
-                    setBalance(balance / 1e9); // Convert from lamports to SOL
+                    setBalance(balance / 1e9); 
                 } catch (err) {
                     console.error("Error fetching balance:", err);
                     setError('Failed to fetch balance.');
@@ -49,7 +49,6 @@ function CoinFlipGame() {
             return;
         }
 
-        // Convert betAmount to number
         const betAmountNumber = parseFloat(betAmount);
 
         if (isNaN(betAmountNumber) || betAmountNumber <= 0) {
@@ -58,11 +57,10 @@ function CoinFlipGame() {
         }
 
         if (betAmountNumber > balance) {
-            setBetError('Insufficient balance.');
-            return;
-        }
+          setBetError('Insufficient balance.');
+          return;
+      }
 
-        // Clear any previous bet errors
         setBetError('');
 
         const flipResult = Math.random() < 0.5 ? 'heads' : 'tails';
@@ -70,10 +68,10 @@ function CoinFlipGame() {
 
         if (flipResult === selectedSide) {
             alert(`You won! You doubled your bet of ${betAmount} SOL.`);
-            setBalance(balance + betAmountNumber); // Update balance on win
+            setBalance(balance + betAmountNumber*2); 
         } else {
             alert(`You lost! Better luck next time.`);
-            setBalance(balance - betAmountNumber); // Update balance on loss
+            setBalance(balance - betAmountNumber); 
         }
     };
 
